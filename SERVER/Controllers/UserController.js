@@ -20,13 +20,13 @@ const checkuser = asyncHandler(async(req,res) => {
 // register user 
 
 const registeruser = asyncHandler(async(req,res) => {
-
         try
         {
             const { name,email ,password,pic } = req.body;
             console.log(' data in Backend is - ',name,email,password)
-            if(!email || !password || !name){
-                    return res.status(422).json({error : 'Please Fill all the Fields'})
+            if(!email || !password || !name || !pic){
+                    console.log('Error for data is - ',{email,name,password,pic});
+                    return res.status(422).json({error : 'Please FillLLL  all the Fields'})
             }
 
             const  finduser = await User.findOne({email})
@@ -42,28 +42,6 @@ const registeruser = asyncHandler(async(req,res) => {
                 name :name,
                 pic
             })
-
-            // const msg = {
-            //     to :  'sarbbsandhu555@gmail.com',
-            //     from: 'mrsinghbusiness05@gmail.com',
-            //     subject : 'Sending with Twilio ,even with Ndoe.js',
-            //     text : 'and easy totototototototototot',
-            //     html : 'Easy to Do Anywhere even with Node.js'
-            // };
-
-            // (async () => {
-            //     try{
-            //         await sgmail.send(msg);
-
-            //     }catch(error){
-            //         console.log(error);
-
-            //         if(error.response){
-            //              console.log(error.response.body)
-            //         }
-            //     }
-            // })();
-
 
             if(user){
                 res.status(201).json({
